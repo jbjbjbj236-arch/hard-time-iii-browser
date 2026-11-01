@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111713">
+  <title>Hard Time III — Browser Edition</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js"}}
+  </script>
+</head>
+<body>
+  <div id="game-shell">
+    <canvas id="game"></canvas>
+    <div class="grain"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Hard Time Browser Edition home"><span class="brand-mark">HT</span><span>HARD TIME <b>III</b><small>BROWSER EDITION</small></span></a>
+      <div class="top-actions"><span class="live-dot">SIMULATION LIVE</span><button id="save-btn" class="small-btn">SAVE</button><button id="menu-btn" class="small-btn">MENU</button></div>
+    </header>
+    <section class="hud">
+      <div class="profile panel"><div class="avatar">R</div><div><strong id="player-name">Rookie</strong><small>INMATE · BLOCK A</small></div><div class="cash">$<span id="cash">25</span></div></div>
+      <div class="stats panel">
+        <div class="stat"><span>HEALTH</span><div class="meter"><i id="health-bar" class="health" style="width:100%"></i></div><b id="health-value">100</b></div>
+        <div class="stat"><span>STAMINA</span><div class="meter"><i id="stamina-bar" class="stamina" style="width:100%"></i></div><b id="stamina-value">100</b></div>
+        <div class="stat"><span>REPUTATION</span><div class="meter"><i id="rep-bar" class="rep" style="width:12%"></i></div><b id="rep-value">12</b></div>
+      </div>
+    </section>
+    <div class="right-hud"><div class="clock panel"><small>DAY 01 · MONDAY</small><strong id="clock">08:00</strong><span>BLOCK A / YARD</span></div><div class="objective panel"><small>CURRENT OBJECTIVE</small><strong id="objective">Get familiar with the block.</strong></div></div>
+    <div class="crosshair" id="crosshair">+</div>
+    <div class="bottom-hud"><div class="controls panel"><span><kbd>W A S D</kbd> MOVE</span><span><kbd>SHIFT</kbd> RUN</span><span><kbd>SPACE</kbd> JUMP</span><span><kbd>E</kbd> INTERACT</span><span><kbd>F</kbd> ATTACK</span><span><kbd>ESC</kbd> MENU</span></div><div id="toast" class="toast"></div></div>
+    <div id="start-screen" class="overlay">
+      <div class="start-card">
+        <div class="eyebrow">A LIFE BEHIND BARS</div><h1>HARD TIME <em>III</em></h1><p class="subtitle">YOUR STORY. YOUR RULES. YOUR TIME.</p>
+        <p class="intro">A browser-based prison-life sandbox. Explore the block, meet its residents, build your reputation, and decide how you'll survive.</p>
+        <button id="start-btn" class="primary-btn">ENTER THE YARD <span>→</span></button>
+        <div class="start-foot"><span>WASD TO MOVE</span><span>·</span><span>CLICK TO LOOK</span><span>·</span><span>ESC FOR MENU</span></div>
+      </div>
+    </div>
+    <div id="menu-screen" class="overlay hidden"><div class="modal-card"><button class="x-btn" data-close>×</button><div class="eyebrow">PAUSE MENU</div><h2>TAKE A BREATHER.</h2><div class="menu-grid"><button data-action="resume">RESUME GAME <small>Back to the yard</small></button><button data-action="character">CHARACTER <small>Edit your inmate</small></button><button data-action="mods">MOD MANAGER <small>Import custom content</small></button><button data-action="save">SAVE GAME <small>Store progress locally</small></button></div><p class="modal-note">Progress is stored in this browser on this device.</p></div></div>
+    <div id="editor-screen" class="overlay hidden"><div class="modal-card editor-card"><button class="x-btn" data-close>×</button><div class="eyebrow">INMATE RECORD</div><h2>MAKE YOURSELF.</h2><label>NAME<input id="edit-name" maxlength="18" value="Rookie"></label><label>SKIN TONE<select id="edit-skin"><option value="#b97850">Warm</option><option value="#e0b18a">Light</option><option value="#754a37">Deep</option><option value="#c98e69">Tan</option></select></label><label>OUTFIT<select id="edit-outfit"><option value="#b8b8a8">Standard khaki</option><option value="#526d91">Blue uniform</option><option value="#8b5550">Red uniform</option><option value="#555b50">Olive uniform</option></select></label><button id="apply-character" class="primary-btn">APPLY CHANGES</button></div></div>
+    <div id="mods-screen" class="overlay hidden"><div class="modal-card"><button class="x-btn" data-close>×</button><div class="eyebrow">COMMUNITY CONTENT</div><h2>MOD MANAGER.</h2><p class="intro">Load JSON content packs. Mods are validated and applied locally in this browser.</p><div class="mod-drop"><input id="mod-file" type="file" accept=".json,application/json"><span>＋</span><b>CHOOSE A MOD FILE</b><small>JSON mod packs · no executable scripts</small></div><div id="mod-list" class="mod-list"><p class="empty">No mods installed yet.</p></div><button id="download-template" class="secondary-btn">DOWNLOAD MOD TEMPLATE</button></div></div>
+    <div id="notice" class="notice hidden"></div>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
